@@ -1,8 +1,6 @@
 # Demo for Wiz interview
 
 # Instructions / Reminders
-foo
-
 - bar
 - baz
 
@@ -21,5 +19,5 @@ From instructions
 
 Other items
 
-(TODO - confirm) - backup from VM -> s3 encrypted in transit?
-(TODO - clarify) - best practices - cluster in isolated network w/ACL (or similar) to reach db
+- (TODO - confirm) - backup from VM -> s3 encrypted in transit?
+- (TODO - clarify) - best practices - cluster in isolated network w/ACL (or similar) to reach db
