@@ -1,0 +1,12 @@
+# Annoying Mac stuff
+.DS_Store
+**/.DS_Store
+
+# Terraform leftovers
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+
+# Do not commit instructions for tech task as repo may need to be made public 
+# for Wiz review
+instructions.md
