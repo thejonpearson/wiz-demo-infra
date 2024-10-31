@@ -9,3 +9,6 @@
     - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 - possible AMI for "outdated distro?" https://aws.amazon.com/marketplace/server/configuration?productId=cce59db7-36a5-4f61-8cc7-e726f6b484bf&ref_=psb_cfg_continue
 - Mongo release versions https://www.mongodb.com/legal/support-policy/lifecycles
+
+- terraform pre-commit hooks - https://github.com/antonbabenko/pre-commit-terraform
+

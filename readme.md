@@ -1,5 +1,7 @@
 # Demo for Wiz interview
 
+https://github.com/thejonpearson/wiz-demo
+
 # Instructions / Reminders
 - bar
 - baz
