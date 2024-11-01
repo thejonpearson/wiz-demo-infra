@@ -21,5 +21,8 @@ From instructions
 
 Other items
 
+- ssm params result in cleartext passwords in statefile
+    - not an issue with *some* remote backends, but clearly an issue w/local state that gets backed up
+
 - (TODO - confirm) - backup from VM -> s3 encrypted in transit?
 - (TODO - clarify) - best practices - cluster in isolated network w/ACL (or similar) to reach db

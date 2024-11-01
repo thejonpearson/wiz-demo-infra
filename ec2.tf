@@ -3,7 +3,7 @@
 resource "aws_iam_role" "mongo-role" {
   name = "Mongo-Instance-Profile"
   assume_role_policy = jsonencode({
-    Version   = "2008-10-17"
+    Version = "2008-10-17"
     Statement = [
       {
         Action = "sts:AssumeRole"
@@ -60,44 +60,45 @@ resource "aws_iam_instance_profile" "mongo-profile" {
 # }
 
 resource "random_string" "mongo-user" {
-    length = 15
-    special = false  
+  length  = 15
+  special = false
 }
 
 resource "random_string" "mongo-pass" {
-    length = 15
-    special = false  
+  length  = 15
+  special = false
 }
 
 resource "aws_ssm_parameter" "mongo-user" {
-  name = "mongo-user"
-  type = "SecureString"
+  name  = "mongo-user"
+  type  = "SecureString"
   value = random_string.mongo-user.result
 }
 
 resource "aws_ssm_parameter" "mongo-pw" {
-  name = "mongo-pw"
-  type = "SecureString"
+  name  = "mongo-pw"
+  type  = "SecureString"
   value = random_string.mongo-pass.result
 }
 
 # Instance itself
 
 resource "aws_instance" "mongo-instance" {
-    ami = "ami-0ef1e10f98f6ad0e7" # bitnami-mongodb-5.0.22-0-linux-debian-11-x86_64-hvm-ebs-nami
-    instance_type = "t3.medium"
-    iam_instance_profile = aws_iam_instance_profile.mongo-profile.id
-    key_name = "mongo"
-    subnet_id = module.vpc.public_subnets[0]
-    vpc_security_group_ids = [aws_security_group.mongo.id]
-    # here we're passing the ssm parameter names created above, then re-pulling the values from ssm in the script
-    # I suspect there's an easier way to do this...
-    user_data = templatefile("./userdata/script.sh", {
-        MONGO_USER_SSM_ID = aws_ssm_parameter.mongo-user.id
-        MONGO_PASS_SSM_ID = aws_ssm_parameter.mongo-pw.id
-    })
+  ami                    = "ami-0ef1e10f98f6ad0e7" # bitnami-mongodb-5.0.22-0-linux-debian-11-x86_64-hvm-ebs-nami
+  instance_type          = "t3.medium"
+  iam_instance_profile   = aws_iam_instance_profile.mongo-profile.id
+  key_name               = "mongo"
+  subnet_id              = module.vpc.public_subnets[0]
+  vpc_security_group_ids = [aws_security_group.mongo.id]
+  # here we're passing the ssm parameter names created above, then re-pulling the values from ssm in the script
+  # I suspect there's an easier way to do this...
+  user_data = templatefile("./userdata/script.sh", {
+    MONGO_USER_SSM_ID = aws_ssm_parameter.mongo-user.id
+    MONGO_PASS_SSM_ID = aws_ssm_parameter.mongo-pw.id
+    BUCKET_SSM_ID     = aws_ssm_parameter.mongo_backup_s3.id
+  })
 
-  
+
 }
 
 # security group rules for allowing trafffic
@@ -126,10 +127,10 @@ resource "aws_eip" "testing-ip" {
   domain   = "vpc"
 }
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
-  security_group_id            = aws_security_group.mongo.id
-  ip_protocol                  = "tcp"
-  to_port                      = 22
-  from_port                    = 22
+  security_group_id = aws_security_group.mongo.id
+  ip_protocol       = "tcp"
+  to_port           = 22
+  from_port         = 22
   cidr_ipv4         = "24.217.129.67/32"
 }
 
