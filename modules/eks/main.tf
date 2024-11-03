@@ -38,7 +38,7 @@ module "eks" {
   enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
-    example = {
+    nodes = {
       instance_types = ["t3.medium"]
       name = "${var.name}-eks-mng"    
       min_size = 1

@@ -9,7 +9,7 @@ terraform {
   }
 }
 
-## AWS Specific ##
+## AWS Specific Configs##
 
 provider "aws" {
   region = "us-west-2"

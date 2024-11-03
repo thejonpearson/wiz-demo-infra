@@ -2,7 +2,6 @@
 # This module will create the IAM role and policy required for the AWS Load Balancer Controller to function.
 module "aws_load_balancer_controller_irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.3.1"
 
   role_name = "aws-load-balancer-controller"
 
@@ -16,3 +15,28 @@ module "aws_load_balancer_controller_irsa_role" {
   }
 }
 
+# This module will create the Helm release for the AWS Load Balancer Controller.
+# TODO - consider updating main eks and removing below helm resource
+#   instead deploying all cluster addons via https://github.com/aws-ia/terraform-aws-eks-blueprints-addons
+resource "helm_release" "aws_load_balancer_controller" {
+  name       = "aws-load-balancer-controller"
+  repository = "https://aws.github.io/eks-charts"
+  chart      = "aws-load-balancer-controller"
+  namespace  = "kube-system"
+  timeout    = "660"
+
+  set {
+    name  = "clusterName"
+    value = module.eks.cluster_name
+  }
+
+  set {
+    name  = "serviceAccount.name"
+    value = "aws-load-balancer-controller"
+  }
+
+  set {
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = module.aws_load_balancer_controller_irsa_role.iam_role_arn
+  }
+}
