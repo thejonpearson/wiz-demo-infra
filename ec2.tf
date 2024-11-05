@@ -56,7 +56,7 @@ resource "aws_iam_role_policy_attachment" "ssm_access" {
 # most testing without actually launching an outdated VM with admin access
 
 resource "aws_iam_role_policy_attachment" "aws_admin" {
-  role       = aws_iam_role.role.name
+  role       = aws_iam_role.mongo-role.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
@@ -118,14 +118,12 @@ resource "aws_instance" "mongo-instance" {
   subnet_id              = module.vpc.public_subnets[0]
   vpc_security_group_ids = [aws_security_group.mongo.id]
   # here we're passing the ssm parameter names created above, then re-pulling the values from ssm in the script
-  # I suspect there's an easier way to do this...
   user_data = templatefile("./userdata/script.sh", {
     MONGO_USER_SSM_ID = aws_ssm_parameter.mongo-user.id
     MONGO_PASS_SSM_ID = aws_ssm_parameter.mongo-pw.id
     BUCKET_SSM_ID     = aws_ssm_parameter.mongo_backup_s3.id
   })
-
-
+  depends_on = [aws_ssm_parameter.mongo_backup_s3]
 }
 
 # security group rules for allowing trafffic
@@ -159,17 +157,17 @@ resource "aws_vpc_security_group_ingress_rule" "allow_eks" {
 
 # specifically assign elastic IP and allow ssh from me 
 
-# resource "aws_eip" "testing-ip" {
-#   instance = aws_instance.mongo-instance.id
-#   domain   = "vpc"
-# }
-# resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
-#   security_group_id = aws_security_group.mongo.id
-#   ip_protocol       = "tcp"
-#   to_port           = 22
-#   from_port         = 22
-#   cidr_ipv4         = "24.217.129.67/32"
-# }
+resource "aws_eip" "testing-ip" {
+  instance = aws_instance.mongo-instance.id
+  domain   = "vpc"
+}
+resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+  security_group_id = aws_security_group.mongo.id
+  ip_protocol       = "tcp"
+  to_port           = 22
+  from_port         = 22
+  cidr_ipv4         = "24.217.129.67/32"
+}
 
 # "internal" dns
 # unregistered, so it won't resolve outside the VPC but that's all we want anyway
