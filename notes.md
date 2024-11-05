@@ -1,7 +1,6 @@
 ## Notes, useful sites, collections, etc that may be useful to have handy
 
 
-
 ### Links
 
 - terraform provider links
@@ -12,3 +11,10 @@
 
 - terraform pre-commit hooks - https://github.com/antonbabenko/pre-commit-terraform
 
+- https://navyadevops.hashnode.dev/step-by-step-guide-creating-an-eks-cluster-with-alb-controller-using-terraform-modules#heading-5-aws-load-balancer-controller-deployment
+
+
+
+https://aws.github.io/aws-eks-best-practices/networking/index/
+
+https://github.com/nat-henderson/terraform-provider-dominos
