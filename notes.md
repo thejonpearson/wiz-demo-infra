@@ -3,17 +3,21 @@
 
 ### Links
 
-- terraform provider links
-    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
-    - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
-- possible AMI for "outdated distro?" https://aws.amazon.com/marketplace/server/configuration?productId=cce59db7-36a5-4f61-8cc7-e726f6b484bf&ref_=psb_cfg_continue
-- Mongo release versions https://www.mongodb.com/legal/support-policy/lifecycles
+https://docs.aws.amazon.com/
 
-- terraform pre-commit hooks - https://github.com/antonbabenko/pre-commit-terraform
+https://github.com/kubernetes-sigs/
 
-- https://navyadevops.hashnode.dev/
+https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/
 
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
+https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html
+
+https://navyadevops.hashnode.dev/
+
+https://web.devopstopologies.com/
+
+https://devhints.io/
 
 https://aws.github.io/aws-eks-best-practices/networking/index/
 
