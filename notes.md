@@ -11,7 +11,7 @@
 
 - terraform pre-commit hooks - https://github.com/antonbabenko/pre-commit-terraform
 
-- https://navyadevops.hashnode.dev/step-by-step-guide-creating-an-eks-cluster-with-alb-controller-using-terraform-modules#heading-5-aws-load-balancer-controller-deployment
+- https://navyadevops.hashnode.dev/
 
 
 

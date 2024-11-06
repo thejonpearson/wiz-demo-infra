@@ -68,23 +68,6 @@ resource "aws_iam_instance_profile" "mongo-profile" {
 
 # Secrets we need
 
-# # This was my initial though for creating user/pw, but it generates each 
-# # TF run, which effectively forces pw rotation every TF run. For POC, moving to
-# # using random_string instead. 
-# data "aws_secretsmanager_random_password" "mongo-user" {
-#   password_length = 15
-#   include_space = false
-#   exclude_numbers = true
-#   exclude_punctuation = true
-# }
-
-# data "aws_secretsmanager_random_password" "mongo-pass" {
-#   password_length = 15
-#   include_space = false
-#   exclude_numbers = true
-#   exclude_punctuation = true
-# }
-
 resource "random_string" "mongo-user" {
   length  = 15
   special = false
