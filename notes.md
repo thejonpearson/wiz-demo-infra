@@ -21,4 +21,4 @@ https://devhints.io/
 
 https://aws.github.io/aws-eks-best-practices/networking/index/
 
-https://github.com/nat-henderson/terraform-provider-dominos
+https://github.com/nat-henderson/terraform-provider-dominos (fantastic readme)
