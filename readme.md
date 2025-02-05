@@ -37,3 +37,5 @@ Other items
     - not an issue with *some* remote backends, but clearly an issue w/local state that gets backed up
 
 - best practices - cluster in isolated network w/ACL (or similar) to reach db
+
+- testing a change that shouldn't be allowed
