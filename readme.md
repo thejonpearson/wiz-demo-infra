@@ -38,4 +38,5 @@ Other items
 
 - best practices - cluster in isolated network w/ACL (or similar) to reach db
 
-- testing a change that shouldn't be allowed
+- testing a change that shouldn't be allowed (once I enforce it)
+- 
